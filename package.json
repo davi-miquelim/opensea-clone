@@ -6,6 +6,7 @@
     "start": "next start"
   },
   "dependencies": {
+    "@3rdweb/hooks": "^1.9.2",
     "@babel/preset-env": "^7.16.11",
     "@types/p-queue": "^3.2.1",
     "first": "^0.0.3",
