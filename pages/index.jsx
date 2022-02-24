@@ -3,8 +3,10 @@ import Head from 'next/head'
 import Header from '../components/Header'
 import Hero from '../components/Hero'
 import { useWeb3 } from '@3rdweb/hooks'
+import { client } from '../lib/sanityClient'
 import metaMask from '../assets/metafox.png'
 import Image from 'next/image'
+import toast, { Toaster } from 'react-hot-toast'
 
 const style = {
   wrapper: ``,
@@ -17,18 +19,20 @@ const style = {
 const Home = () => {
   const { address, connectWallet } = useWeb3()
 
+  const walletConnectedMessage = () => toast.success('Wallet Connected')
+
   useEffect(() => {
     if (!address) return
     ;(async () => {
       const userDoc = {
         _type: 'users',
-        id: 'address',
+        _id: 'address',
         userName: 'Unnanmed',
         walletAddress: address,
       }
 
       const result = await client.createIfNotExists(userDoc)
-    })()
+    })().then(() => walletConnectedMessage())
   }, [address])
 
   return (
@@ -57,6 +61,7 @@ const Home = () => {
           </div>
         </div>
       )}
+      <Toaster position="top-center" reverseOrder={false} />
     </div>
   )
 }
