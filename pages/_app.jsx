@@ -1,5 +1,6 @@
 import '../styles/globals.css'
 import { ThirdwebWeb3Provider } from '@3rdweb/hooks'
+import Layout from '../components/Layout'
 
 /**
  * The chain ID 4 stands for Rinkeby testnet.
@@ -19,7 +20,9 @@ function MyApp({ Component, pageProps }) {
       supportedChainIds={supportedChainIds}
       connectors={connectors}
     >
-      <Component {...pageProps} />
+      <Layout>
+        <Component {...pageProps} />
+      </Layout>
     </ThirdwebWeb3Provider>
   )
 }
